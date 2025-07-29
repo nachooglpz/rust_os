@@ -13,9 +13,17 @@ The version number should contain `-nightly` at the end.
 
 - If you want to return to the Stable Channel on the directory: `rustup override unset`.
 
+### Run target triple configuration
+- The kernel runs on a custom target configuration, so in order to tell `cargo` that it should recomplie the `core` and `compiler_builtins` libraries, it needs access to the rust source code.
+
+- To install the rust source code: `rustup component add rust-src`.
+
 ### Implement the target triple
-- This step is only for informational purposes, the target specification is already implemented on the `x86_64-nacho_os.son`, and embeded on the `.cargo/config.toml` configuration.<br>
-So the project can be run with just `cargo build`
+- This is only for informational purposes.
+
+- The target specification is already implemented on the `x86_64-nacho_os.son`, and embeded on the `.cargo/config.toml` configuration.<br>
+
+- So the project can be run with just `cargo build`
 
 - To run this project it is important to use a bare metal environment.
 The guide recommends (while setting up the freestanding rust binary) the ARM Cortex-M (embedded) with hardware floating point (hf).
