@@ -1,5 +1,6 @@
-#![no_std]
-#![no_main]
+#![no_std] // don't link the std library
+#![no_main] // disable all Rust-level entry points
+
 use core::panic::PanicInfo;
 
 // this function is called on panic
@@ -8,7 +9,11 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
-#[no_mangle]
+#[no_mangle] // don't mangle the name of this function
 pub extern "C" fn _start() -> ! {
+    // the linker looks for a function called '_start'
+    // so this function is the entry point
     loop {}
 }
+
+// next step -> Memory-Related Intrinsics
