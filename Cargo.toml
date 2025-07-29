@@ -6,10 +6,11 @@ authors = ["Luis Ignacio Gomez"]
 
 [dependencies]
 
+# ----- the following is commented because it is now stated on 'x86_64-nacho_os.json'.
 # the profile used for 'cargo run'
-[profile.dev]
-panic = "abort" # disable stack unwinding on panic
+# [profile.dev]
+# panic = "abort" # disable stack unwinding on panic
 
 # profile used for 'cargo build --release'
-[profile.release]
-panic = "abort" # disable stack unwinding on panic
+# [profile.release]
+# panic = "abort" # disable stack unwinding on panic
