@@ -1,7 +1,8 @@
 # allow to run without specifying the target triple
 [build]
-# target = "thumbv7em-none-eabihf" # for setting up the freestanding rust binary
 target = "x86_64-nacho_os.json" # for setting up the kernel
+# target = "thumbv7em-none-eabihf" # example for setting up the freestanding rust binary
 
 [unstable]
+build-std-features = ["compiler-builtins-mem"]
 build-std = ["core", "compiler_builtins"]
