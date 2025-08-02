@@ -23,7 +23,7 @@ The version number should contain `-nightly` at the end.
 
 - The target specification is already implemented on the `x86_64-nacho_os.son`, and embeded on the `.cargo/config.toml` configuration.<br>
 
-- So the project can be run with just `cargo build`
+- So the project can be run with just `cargo build`.
 
 - To run this project it is important to use a bare metal environment.
 The guide recommends (while setting up the freestanding rust binary) the ARM Cortex-M (embedded) with hardware floating point (hf).
