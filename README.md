@@ -18,6 +18,34 @@ The version number should contain `-nightly` at the end.
 
 - To install the rust source code: `rustup component add rust-src`.
 
+### Creating a bootimage
+- To create a boot image for this project, the guide uses a tool called `bootimage`.
+
+- To install it, go to the home directory (or any directory outside of the `cargo` project) and run: `cargo install bootimage`.
+
+- To run `bootimage`, you need to have `llvm-tools-preview`.
+
+- As we are using a toolchain override (the Nightly Channel), we need to install the `llvm-tools-preview` on the `cargo` project.
+
+- To do so, go back to the `cargo` directory and run: `rustup component add llvm-tools-preview`.
+
+- Once installed the tools, you can create the bootable disk image by running: `cargo bootimage`.
+
+- This will create a file called `bootimage-nacho_os.bin` in the `target/x86_64-nacho_os/debug` directory.
+
+### Booting on QEMU
+- The virtual machine that the guide recommends is QEMU.
+
+- It can be installed on `linux` by running: `apt-get install qemu-user-static`.
+
+- Or you can access its [official site](https://www.qemu.org/download/) for more information.
+
+- To boot the disk image into QEMU, run:
+`qemu-system-x86_64 -drive format=raw,file=target/x86_64-nacho_os/debug/bootimage-nacho_os.bin`.
+
+### Running the project using `cargo run`
+- The project is also configured to be run using `cargo run`, so feel free to use it.
+
 ### Implement the target triple
 - This is only for informational purposes.
 
