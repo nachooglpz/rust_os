@@ -14,22 +14,22 @@ The version number should contain `-nightly` at the end.
 - If you want to return to the Stable Channel on the directory: `rustup override unset`.
 
 ### Run target triple configuration
-- The kernel runs on a custom target configuration, so in order to tell `cargo` that it should recomplie the `core` and `compiler_builtins` libraries, it needs access to the rust source code.
+- The kernel runs on a custom target configuration, so in order to tell `Cargo` that it should recompile the `core` and `compiler_builtins` libraries, it needs access to the rust source code.
 
 - To install the rust source code: `rustup component add rust-src`.
 
 ### Creating a bootimage
 - To create a boot image for this project, the guide uses a tool called `bootimage`.
 
-- To install it, go to the home directory (or any directory outside of the `cargo` project) and run: `cargo install bootimage`.
+- To install it, navigate to the `home` directory (or any directory outside of the `Cargo project`) and run: `cargo install bootimage`.
 
 - To run `bootimage`, you need to have `llvm-tools-preview`.
 
-- As we are using a toolchain override (the Nightly Channel), we need to install the `llvm-tools-preview` on the `cargo` project.
+- As we are using a toolchain override (the Nightly Channel), we need to install the `llvm-tools-preview` on the `Cargo project`.
 
-- To do so, go back to the `cargo` directory and run: `rustup component add llvm-tools-preview`.
+- To do so, navigate back to the `Cargo` directory and run: `rustup component add llvm-tools-preview`.
 
-- Once installed the tools, you can create the bootable disk image by running: `cargo bootimage`.
+- Once the tools are installed, you can create the bootable disk image by running: `cargo bootimage`.
 
 - This will create a file called `bootimage-nacho_os.bin` in the `target/x86_64-nacho_os/debug` directory.
 
@@ -49,7 +49,7 @@ The version number should contain `-nightly` at the end.
 ### Implement the target triple
 - This is only for informational purposes.
 
-- The target specification is already implemented on the `x86_64-nacho_os.son`, and embeded on the `.cargo/config.toml` configuration.<br>
+- The target specification is already implemented on the `x86_64-nacho_os.json`, and embedded on the `.cargo/config.toml` configuration.<br>
 
 - So the project can be run with just `cargo build`.
 
