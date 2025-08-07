@@ -6,7 +6,7 @@ authors = ["Luis Ignacio Gomez"]
 
 [dependencies]
 bootloader = "0.9"
-volatile = "0.2.6
+volatile = "0.2.6"
 
 # ----- the following is commented because it is now stated on 'x86_64-nacho_os.json'.
 # the profile used for 'cargo run'
