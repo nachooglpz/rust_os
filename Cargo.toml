@@ -7,6 +7,11 @@ authors = ["Luis Ignacio Gomez"]
 [dependencies]
 bootloader = "0.9"
 volatile = "0.2.6"
+spin = "0.5.2"
+
+[dependencies.lazy_static]
+version = "1.0"
+features = ["spin_no_std"]
 
 # ----- the following is commented because it is now stated on 'x86_64-nacho_os.json'.
 # the profile used for 'cargo run'

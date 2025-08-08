@@ -2,6 +2,7 @@
 #![no_main] // disable all Rust-level entry points
 
 use core::panic::PanicInfo;
+use core::fmt::Write;
 
 mod vga_buffer;
 
@@ -15,7 +16,8 @@ fn panic(_info: &PanicInfo) -> ! {
 pub extern "C" fn _start() -> ! {
     // the linker looks for a function called '_start'
     // so this function is the entry point
-    vga_buffer::print_smthng();
+    vga_buffer::WRITER.lock().write_str("Hello again, ").unwrap();
+    write!(vga_buffer::WRITER.lock(), "some numbers: {}, {}", 42, 1.0/3.0).unwrap();
 
     loop {}
 }
