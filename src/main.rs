@@ -8,12 +8,27 @@ use core::panic::PanicInfo;
 use x86_64::instructions::port::Port;
 
 mod vga_buffer;
+mod serial;
 
 // this function is called on panic
+#[cfg(not(test))]
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     println!("{}", _info);
 
+    loop {}
+}
+
+// panic handler on test mode
+#[cfg(test)]
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    serial_println!("[failed]\n");
+    serial_println!("Error: {}", info);
+    exit_qemu(QemuExitCode::Failed);
+
+    // we still loop because the compiler does not know that 
+    // the isa-debug-exit device causes a program to exit
     loop {}
 }
 
@@ -32,12 +47,14 @@ pub extern "C" fn _start() -> ! {
 }
 
 #[cfg(test)]
-pub fn test_runner(tests: &[&dyn Fn()]) {
+fn test_runner(tests: &[&dyn Fn()]) {
+    serial_println!("\n");
+
     println!("Running {} tests", tests.len());
     for test in tests {
         test();
     }
-
+    
     exit_qemu(QemuExitCode::Success);
 }
 
@@ -57,8 +74,7 @@ pub fn exit_qemu(exit_code: QemuExitCode) {
 
 #[test_case]
 fn trivial_assertion() {
-    print!("trivial assertion... ");
-    assert_eq!(1, 1);
-    println!("[ok]");
+    serial_println!("trivial assertion... ");
+    assert_eq!(0, 1);
+    serial_println!("[ok]");
 }
-
