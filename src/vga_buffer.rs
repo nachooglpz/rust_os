@@ -151,3 +151,31 @@ macro_rules! println {
 pub fn _print(args: fmt::Arguments) {
     WRITER.lock().write_fmt(args).unwrap();
 }
+
+// here goes the test cases
+#[test_case]
+fn test_println_simple() {
+    println!("test_println_simple output");
+}
+
+#[test_case]
+fn test_println_many() {
+    for _ in 0..200 {
+        println!("test_println_many output")
+    }
+}
+
+#[test_case]
+fn test_println_output() {
+    let s = "a test string that fits on a single line";
+
+    println!("{}", s);
+
+    for (i, c) in s.chars().enumerate() {
+        // the printed line appears on line BUFFER_HEIGHT - 2
+        let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGTH - 2][i].read();
+
+        // we check that each character of the string appears in the VGA text buffer
+        assert_eq!(char::from(screen_char.ascii_character), c);
+    }
+}
