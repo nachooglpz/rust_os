@@ -46,13 +46,28 @@ pub extern "C" fn _start() -> ! {
     loop {}
 }
 
+pub trait Testable {
+    fn run(&self) -> ();
+}
+
+impl<T> Testable for T
+where
+    T: Fn(),
+{
+    fn run(&self) {
+        serial_println!("{}...\t", core::any::type_name::<T>());
+        self();
+        serial_println!("[ok]");
+    }
+}
+
 #[cfg(test)]
-fn test_runner(tests: &[&dyn Fn()]) {
+fn test_runner(tests: &[&dyn Testable]) {
     serial_println!("\n");
 
-    println!("Running {} tests", tests.len());
+    serial_println!("Running {} tests", tests.len());
     for test in tests {
-        test();
+        test.run();
     }
     
     exit_qemu(QemuExitCode::Success);
@@ -74,7 +89,5 @@ pub fn exit_qemu(exit_code: QemuExitCode) {
 
 #[test_case]
 fn trivial_assertion() {
-    serial_println!("trivial assertion... ");
-    assert_eq!(0, 1);
-    serial_println!("[ok]");
+    assert_eq!(1, 1);
 }
